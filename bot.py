@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 
+
 import discord.ext
 import discord.ext.commands
 
@@ -28,12 +29,23 @@ async def womp(ctx):
     '''Post a womp womp womp gif'''
     await ctx.send(file=discord.File('giphy.gif'))
 
+stopSpam = False
+@bot.command()
+async def stop(ctx):
+    '''Stop a spam command'''
+    global stopSpam
+    stopSpam = True
+
 @bot.command()
 async def spam(ctx, message, times):
     '''Spam a message'''
     times = int(times)
+    global stopSpam
     for x in range(times):
         await ctx.send(message)
+        if stopSpam == True:
+            break
+    stopSpam = False
 
 
 bot.run('MTIzMDE1MTk2Njk3MDM0NzY0MQ.Gp97DL.wPtZf6xxcpIgmg4_jEaCcCfZ0WZ4tDnJUqrtH8')
