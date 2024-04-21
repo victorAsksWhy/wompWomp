@@ -1,9 +1,9 @@
 import discord
-from discord.ext import commands
-
-
 import discord.ext
 import discord.ext.commands
+from discord.ext import commands
+import random as r
+
 
 
 description = '''An example bot to showcase the discord.ext.commands extension
@@ -34,7 +34,8 @@ stopSpam = False
 async def stop(ctx):
     '''Stop a spam command'''
     global stopSpam
-    stopSpam = True
+    if stopSpam == False:
+        stopSpam = True
 
 @bot.command()
 async def spam(ctx, message, times):
@@ -47,5 +48,10 @@ async def spam(ctx, message, times):
             break
     stopSpam = False
 
-
-bot.run('MTIzMDE1MTk2Njk3MDM0NzY0MQ.Gp97DL.wPtZf6xxcpIgmg4_jEaCcCfZ0WZ4tDnJUqrtH8')
+@bot.command()
+async def badjoke(ctx):
+    '''Tell a horrilbe joke'''
+    jokes = open('dadjokes.txt').read().splitlines()
+    joke = r.choice(jokes)
+    await ctx.send(joke)
+    
